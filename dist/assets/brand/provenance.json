@@ -1,0 +1,70 @@
+{
+  "source": "../logo-koi-systems.png",
+  "sourceSHA256": "fdca454f30bb797409f39a8fb8663172e680d1217e5b4aaa75b995def0093a56",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "cornerAlpha": 0,
+  "method": "lossless crop around alpha >= 4 with 4px safety margin; exact RGBA inside; no internal mask, repainting, recoloring or resampling",
+  "excludedAlphaMaximum": 3,
+  "split": 950,
+  "transparentGap": {
+    "start": 947,
+    "end": 953,
+    "length": 6
+  },
+  "symbol": {
+    "x": 304,
+    "y": 183,
+    "width": 714,
+    "height": 765
+  },
+  "wordmark": {
+    "x": 109,
+    "y": 950,
+    "width": 1042,
+    "height": 183
+  },
+  "full": {
+    "x": 109,
+    "y": 183,
+    "width": 1042,
+    "height": 950
+  },
+  "assets": {
+    "symbol": {
+      "file": "koi-official-symbol.png",
+      "rect": {
+        "x": 304,
+        "y": 183,
+        "width": 714,
+        "height": 765
+      },
+      "rgbaSHA256": "1ddf867c3199f6c332bc0facb7daf0c8e33b20d2cf14bd3d2bed8e8f7b11d3c7",
+      "bytes": 318582
+    },
+    "wordmark": {
+      "file": "koi-official-wordmark.png",
+      "rect": {
+        "x": 109,
+        "y": 950,
+        "width": 1042,
+        "height": 183
+      },
+      "rgbaSHA256": "5b6bc1faac40178c824db57817ea30f031b190eb1479fe0b5c78d8ce7599db19",
+      "bytes": 102402
+    },
+    "full": {
+      "file": "koi-official-full.png",
+      "rect": {
+        "x": 109,
+        "y": 183,
+        "width": 1042,
+        "height": 950
+      },
+      "rgbaSHA256": "8d4028e795d479bed9093c4e39f8a9e21c0598e09e7775b0763708f2fcd3ad9d",
+      "bytes": 434765
+    }
+  }
+}

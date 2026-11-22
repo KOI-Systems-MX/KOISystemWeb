@@ -1,0 +1,47 @@
+/* Three depths: bottom + pigment type (0/1), swimming volume (2), water surface (3). */
+.hero.wrap[data-submerged]{--shore:clamp(32px,6.5vw,136px);align-items:flex-start;padding-inline:var(--shore)}
+.hero[data-submerged] #pond-floor,.hero[data-submerged] #pond-surface{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;touch-action:none}
+.hero[data-submerged] #pond-floor{z-index:0}
+.hero.wrap[data-submerged]::after{z-index:0;opacity:.10}
+.hero[data-submerged] .hero-copy{
+  z-index:1;width:clamp(390px,37vw,520px);max-width:100%;padding:0;
+  text-align:left;background:none;border:0;border-radius:0;box-shadow:none;
+  backdrop-filter:none;isolation:auto;transform:none;
+}
+.hero[data-submerged] .hero-copy::before,.hero[data-submerged] .hero-copy::after{content:none}
+.hero[data-submerged] .hero-copy>*{position:relative}
+.hero[data-submerged] .hero-copy h1,.hero[data-submerged] .hero-copy>p,.hero[data-submerged] .hero-copy .eyebrow{mix-blend-mode:multiply}
+.hero[data-submerged] .paper-seal{margin:0 auto 20px 0;transform:rotate(-5deg);border-color:#a9654f77;color:#9a563d}
+.hero[data-submerged] .hero-copy .eyebrow{justify-content:flex-start;color:#4d655c}
+.hero[data-submerged] h1{font-size:clamp(38px,3.55vw,50px);margin:22px 0 20px;letter-spacing:-1.8px;color:#123e42}
+.hero[data-submerged] h1 em{color:#ae573d}
+.hero[data-submerged] .hero-copy>p{max-width:none;font-size:16px;line-height:1.8;color:#415e54}
+.hero[data-submerged] .hero-actions{justify-content:flex-start;gap:22px}
+.hero[data-submerged] .hero-actions a{min-height:44px}
+.hero[data-submerged] .hero-actions .button{background:#294e44;border-color:#294e44;box-shadow:none;border-radius:1px}
+.hero[data-submerged] .hero-actions .button:hover{background:#173e34}
+.hero[data-submerged] .text-link{border-bottom:1px solid #6b84716b}
+.hero[data-submerged] .hero-note{justify-content:flex-start;color:#5b7364}
+.hero[data-submerged] .koi-scene{z-index:2;background:transparent}
+.hero[data-submerged] .software-interface{z-index:2}
+.hero[data-submerged] #pond-surface{z-index:3}
+.hero[data-submerged] .koi-controls{z-index:5;left:var(--shore);transform:none;justify-content:flex-start;max-width:calc(100% - var(--shore)*2);background:none;padding-inline:0}
+@media(max-width:900px){
+  .hero.wrap[data-submerged]{--shore:32px}
+  .hero[data-submerged] .hero-copy{width:390px}
+  .hero[data-submerged] h1{font-size:38px}
+}
+@media(max-width:700px){
+  .hero.wrap[data-submerged]{--shore:20px}
+  .hero[data-submerged] .hero-copy{width:min(390px,100%)}
+  .hero[data-submerged] h1{font-size:35px}
+  .hero[data-submerged] .hero-copy>p{font-size:14px;line-height:1.75}
+  .hero[data-submerged] .hero-actions{gap:15px}
+  .hero[data-submerged] .koi-controls{gap:5px}
+  .hero[data-submerged] .software-interface{width:200px;bottom:106px;right:20px;opacity:.38;transform:scale(.42);transform-origin:bottom right;z-index:0}
+}
+@media(max-height:700px){
+  .hero[data-submerged] h1{font-size:clamp(28px,3.6vw,38px);margin-block:14px}
+  .hero[data-submerged] .hero-copy>p{font-size:14px;line-height:1.65}
+  .hero[data-submerged] .paper-seal{margin-bottom:12px}
+}

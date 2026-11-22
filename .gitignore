@@ -1,0 +1,15 @@
+.openai/
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+backups/
+*-preview.jpg
+tail-reference-*.png
+.DS_Store
+Thumbs.db
+dist/assets/media/
+*.mp4
+*.mov
+*.webm

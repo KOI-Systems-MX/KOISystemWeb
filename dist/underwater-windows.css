@@ -1,0 +1,16 @@
+/* The shared water surface crosses above the software, at the same pond depth. */
+.hero[data-submerged] #koi-overpass{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
+.hero[data-submerged] #pond-surface{z-index:6}
+.hero[data-submerged] #scene-bits{z-index:7}
+.hero[data-submerged] .koi-controls,.hero[data-submerged] .prototype-expand{z-index:8}
+.hero[data-submerged] .software-window{
+  background:rgb(242 246 232 / calc(var(--frame)*.96));
+  border-color:rgb(109 149 139 / calc(var(--frame)*.3));
+  border-radius:8px;
+  box-shadow:inset 0 0 28px rgb(48 92 85 / calc(var(--frame)*.13)),0 8px 20px rgb(38 78 68 / calc(var(--frame)*.045));
+}
+.hero[data-submerged] .software-chrome{background:#2c5156;color:#f6f4e5}
+.hero[data-submerged] .mock-search{background:#f5f7ed;border-color:#b6cbbb}
+.hero[data-submerged] .product-stage{color:#20494b}
+.hero[data-submerged] .hero-copy h1{color:#214b4b;text-shadow:none}
+.hero[data-submerged] .hero-copy h1 em{color:#a85b42}

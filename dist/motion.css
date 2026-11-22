@@ -1,0 +1,16 @@
+/* A world sized to its actual viewport; no fixed canvas or stretched koi. */
+.hero.wrap{min-height:940px;padding-top:120px;padding-bottom:100px}
+.hero .hero-copy{width:460px;padding:30px 34px 28px;background:#fcfaf2f3;box-shadow:1px 4px 12px #3a57400b;border-color:#fdfcf4;backdrop-filter:none}
+.paper-seal{margin-bottom:21px}.hero h1{font-size:47px}.hero-copy>p{font-size:13px}
+.hero .koi-scene{position:absolute;inset:0;width:100%;height:100%;background:#f8f7f0}
+.hero .koi-scene canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;transform:none;filter:none}
+.hero.wrap:after{opacity:.14}.software-interface{right:3%;top:47%;width:224px;transform:rotate(1deg);opacity:.76}
+.software-window{background:#f9fbf244;border-color:#a9bba566;box-shadow:none;border-radius:3px;clip-path:inset(0 calc((1 - var(--build))*100%) 0 0)}
+.software-chrome{background:transparent;border-color:#b9c8b455}.software-sidebar{border-color:#b9c8b444}.software-metrics>div{background:#e9efdd44;border-color:#bfcdb555}.software-caption{font-size:7px;letter-spacing:.6px}.software-footnote{font-size:7px}.software-chart i{opacity:.7}
+.koi-controls button{font-size:10px;padding:9px 3px;color:#60745e}.koi-scene-caption{font-size:8px;letter-spacing:1.3px;bottom:24px}
+@media(min-width:901px) and (max-width:1100px){.hero .hero-copy,.hero .koi-controls{transform:none}.hero .hero-copy{width:430px}.software-interface{right:1%;width:190px;top:55%}}
+@media(max-width:900px){.hero.wrap{min-height:1100px;padding-top:130px;padding-bottom:70px}.hero .hero-copy{width:min(460px,100%)}.software-interface{position:relative;top:auto;right:auto;align-self:flex-end;margin:35px 4% 18px 0;width:220px}.hero .koi-scene canvas{inset:0;width:100%;height:100%;transform:none}.koi-controls{max-width:460px}}
+@media(max-width:520px){.hero.wrap{min-height:1160px;padding:125px 27px 50px}.hero .hero-copy{padding:27px 23px 24px}.hero h1{font-size:35px;letter-spacing:-1.5px}.hero-copy>p{font-size:12px}.hero .koi-scene canvas{inset:0;width:100%;height:100%}.software-interface{width:200px;margin:24px 0 20px}.koi-controls{gap:5px}.koi-controls button{font-size:9px}.koi-scene-caption{font-size:6px;letter-spacing:.6px;bottom:17px}}
+
+/* The static fallback is only for no-JS: never flash frozen koi while decoding artwork. */
+.koi-js .hero .koi-fallback{display:none!important}
