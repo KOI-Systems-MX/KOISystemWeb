@@ -2,7 +2,9 @@
 
 Landing de KOI Systems, empresa de desarrollo de software a medida.
 
-Repositorio de desarrollo: https://github.com/ElizabethFranangel/KOISystemWeb
+Repositorio de desarrollo: https://github.com/KOI-Systems-MX/KOISystemWeb
+
+Landing publicada: https://koi-systems-mx.github.io/KOISystemWeb/
 
 ## Desarrollo local
 
@@ -21,7 +23,9 @@ node tools/check-site.mjs
 
 ## Desarrollo y validación
 
-Los archivos de la página están en `dist/`. El flujo `.github/workflows/validate.yml` ejecuta las pruebas y valida las rutas en cada actualización de `main` y solicitud de cambio. No publica la página ni activa GitHub Pages.
+Los archivos de la página están en `dist/`. El flujo `.github/workflows/validate.yml` ejecuta las pruebas y valida las rutas en cada actualización de `main` y solicitud de cambio.
+
+El flujo `.github/workflows/pages.yml` publica únicamente `dist/` en GitHub Pages después de aprobar esas comprobaciones. Se ejecuta con cada actualización de `main` y también permite ejecución manual desde Actions. El repositorio tiene Pages configurado con origen GitHub Actions.
 
 Las rutas de recursos son relativas y funcionan bajo `/KOISystemWeb/`. No se requiere proceso de compilación ni claves de acceso en el sitio.
 
