@@ -1,0 +1,16 @@
+{
+  "source": "KOI-Systems-2026-10-30_v2.html",
+  "sourceSHA256": "32493f66f81abfba66f0bf5cfa80af80376bf0fdd39c43359f5090ef259d1df2",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "screens": [
+    "dashboard",
+    "cotizacion",
+    "compras",
+    "ubicaciones",
+    "seguimiento"
+  ],
+  "capture": "Capturas reales del prototipo local, sin edición de la interfaz."
+}

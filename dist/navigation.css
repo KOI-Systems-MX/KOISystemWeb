@@ -1,0 +1,31 @@
+:root{--site-header-height:96px}
+html{scroll-padding-top:calc(var(--site-header-height) + 20px)}
+.header.wrap{
+  position:fixed;inset:0 0 auto;z-index:100;
+  height:var(--site-header-height);width:100%;max-width:none;margin:0;opacity:1;
+  background:rgb(248 247 241 / .98);border-bottom:1px solid #617c942e;
+  box-shadow:0 3px 18px #102c4608;
+}
+.header nav a{min-height:44px;display:inline-flex;align-items:center}
+.header nav a{position:relative}
+.header nav a::after{content:'';position:absolute;left:0;right:0;bottom:3px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .18s ease}
+.header nav a[aria-current="location"]{color:var(--orange-deep)}
+.header nav a[aria-current="location"]::after{transform:scaleX(1)}
+.header .header-cta[aria-current="location"]{color:var(--orange-deep);border-color:var(--orange-deep)}
+.back-to-top{position:fixed;right:24px;bottom:max(20px,env(safe-area-inset-bottom));z-index:90;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 17px;background:var(--paper);border:1px solid #8ba3b7;border-radius:3px;box-shadow:0 4px 20px #102c4614;color:var(--navy);font-size:13px}
+.back-to-top[hidden]{display:none}
+.back-to-top:hover{color:var(--orange-deep);border-color:var(--orange-deep)}
+@media(max-width:1200px){
+  :root{--site-header-height:80px}
+  .header .header-cta{display:none}
+  .header .menu{display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;background:var(--paper);border:1px solid #a6bacb;border-radius:3px;color:var(--navy);font-size:12px}
+  .header nav{display:none;position:absolute;top:100%;left:0;right:0;z-index:101;flex-direction:column;gap:4px;padding:16px clamp(20px,5vw,96px) 24px;background:var(--paper);border:0;border-bottom:1px solid var(--line);box-shadow:0 12px 24px #102c4612;max-height:calc(100dvh - var(--site-header-height));overflow-y:auto;overscroll-behavior:contain}
+  .header nav.open{display:flex}
+  .header nav a{font-size:14px;padding-inline:12px;border-left:3px solid transparent}
+  .header nav a[aria-current="location"]{border-left-color:var(--orange);background:#f16a2b0a}
+  .header nav a::after{content:none}
+}
+@media(max-width:520px){:root{--site-header-height:76px}}
+@media(max-width:520px){.back-to-top{right:16px;bottom:max(16px,env(safe-area-inset-bottom));font-size:12px}}
+@media(max-height:700px){:root{--site-header-height:70px}}
+@media(prefers-reduced-motion:reduce){.header nav a::after{transition:none}}

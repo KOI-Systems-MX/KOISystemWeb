@@ -12,16 +12,16 @@
 .hero[data-submerged] .hero-copy>*{position:relative}
 .hero[data-submerged] .hero-copy h1,.hero[data-submerged] .hero-copy>p,.hero[data-submerged] .hero-copy .eyebrow{mix-blend-mode:multiply}
 .hero[data-submerged] .paper-seal{margin:0 auto 20px 0;transform:rotate(-5deg);border-color:#a9654f77;color:#9a563d}
-.hero[data-submerged] .hero-copy .eyebrow{justify-content:flex-start;color:#4d655c}
-.hero[data-submerged] h1{font-size:clamp(38px,3.55vw,50px);margin:22px 0 20px;letter-spacing:-1.8px;color:#123e42}
+.hero[data-submerged] .hero-copy .eyebrow{justify-content:flex-start;color:#495969}
+.hero[data-submerged] h1{font-size:clamp(38px,3.55vw,50px);margin:22px 0 20px;letter-spacing:-1.8px;color:#122a42}
 .hero[data-submerged] h1 em{color:#ae573d}
-.hero[data-submerged] .hero-copy>p{max-width:none;font-size:16px;line-height:1.8;color:#415e54}
+.hero[data-submerged] .hero-copy>p{max-width:none;font-size:16px;line-height:1.8;color:#41505e}
 .hero[data-submerged] .hero-actions{justify-content:flex-start;gap:22px}
 .hero[data-submerged] .hero-actions a{min-height:44px}
-.hero[data-submerged] .hero-actions .button{background:#294e44;border-color:#294e44;box-shadow:none;border-radius:1px}
-.hero[data-submerged] .hero-actions .button:hover{background:#173e34}
-.hero[data-submerged] .text-link{border-bottom:1px solid #6b84716b}
-.hero[data-submerged] .hero-note{justify-content:flex-start;color:#5b7364}
+.hero[data-submerged] .hero-actions .button{background:#293c4e;border-color:#293c4e;box-shadow:none;border-radius:1px}
+.hero[data-submerged] .hero-actions .button:hover{background:#172b3e}
+.hero[data-submerged] .text-link{border-bottom:1px solid #62788d6b}
+.hero[data-submerged] .hero-note{justify-content:flex-start;color:#54677a}
 .hero[data-submerged] .koi-scene{z-index:2;background:transparent}
 .hero[data-submerged] .software-interface{z-index:2}
 .hero[data-submerged] #pond-surface{z-index:3}

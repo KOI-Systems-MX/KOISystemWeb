@@ -2,16 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFile} from 'node:fs/promises';
-import {createSwimmers,advanceSwimmers,spinePoint,resizeSwimmers} from '../dist/swimming.js';
+import {createSwimmers,advanceSwimmers,spinePoint,anatomyPoint,fillAnatomyMesh,resizeSwimmers} from '../dist/swimming.js';
 import {createLocalTailScene} from '../dist/local-tail-scene.js';
 import {createBitStream} from '../dist/interface-bits.js';
-import {formationAt,materialAt,ease} from '../dist/formation.js';
+import {formationAt,materialAt,koiBirthAt,ease} from '../dist/formation.js';
 import {waterField,protectReading,drawWaterSurface,createPondFloor} from '../dist/pond-water.js';
 import {createFloaters,advanceFloaters} from '../dist/vegetation.js';
 import {products,mountProduct,captureProductSlots,createProductDirector} from '../dist/products.js';
 import {tailField,tailPoint,tailEmitter,paintDissolvingTail,tailColor} from '../dist/tail-dissolution.js';
 import {tailCodeParticle} from '../dist/code-vocabulary.js';
 import {fragmentOverlaps} from '../dist/code-vocabulary.js';
+import {createHydrodynamics,rippleAt} from '../dist/hydrodynamics.js';
 
 // Run the actual scene controller with browser/paint adapters. This checks the
 // reduced-motion contract without changing the user's operating-system setting.
@@ -30,7 +31,7 @@ async function sceneHarness(reduced){
     Image:class{width=100;height=100;decode(){return Promise.resolve();}},
     ResizeObserver:class{observe(){}disconnect(){}},IntersectionObserver:class{observe(){}disconnect(){}},
     matchMedia:()=>preference,requestAnimationFrame:fn=>{frames.set(++serial,fn);return serial;},cancelAnimationFrame:id=>frames.delete(id),
-    tailField,tailPoint,tailEmitter,paintDissolvingTail,tailColor,tailCodeParticle,createSwimmers,advanceSwimmers,spinePoint,resizeSwimmers,createBitStream,createLocalTailScene,formationAt,materialAt,ease,waterField,protectReading,drawWaterSurface,createFloaters,advanceFloaters,products,mountProduct,captureProductSlots,createProductDirector,fragmentOverlaps,
+    tailField,tailPoint,tailEmitter,paintDissolvingTail,tailColor,tailCodeParticle,createSwimmers,advanceSwimmers,spinePoint,anatomyPoint,fillAnatomyMesh,resizeSwimmers,createBitStream,createLocalTailScene,formationAt,materialAt,koiBirthAt,ease,waterField,protectReading,drawWaterSurface,createFloaters,advanceFloaters,products,mountProduct,captureProductSlots,createProductDirector,fragmentOverlaps,createHydrodynamics,rippleAt,
     createSceneBits:()=>({measure(){},draw(){},dispose(){}}),
     createPondFloor:()=>({mode:'test-adapter',draw(){},dispose(){}}),
   });
@@ -49,6 +50,15 @@ test('OS reduced motion paints floor, koi and surface once at the same final tim
   assert.equal(h.nodes['#koi-replay'].disabled,true);
 });
 
+test('the production controller emits tail code during the initial, incomplete formation',async()=>{
+  const h=await sceneHarness(false);
+  for(let t=0;t<=1500;t+=40)h.step(t);
+  const scene=h.nodes['.koi-scene'];
+  assert.equal(scene.dataset.koiBirth,'forming');
+  assert.ok(Number(scene.dataset.tailParticles)>0,'the real controller cannot delay tail emission until the body completes');
+  assert.ok(Number.isFinite(Number(scene.dataset.codeReceived)));
+});
+
 test('pausing and changing the motion preference controls every water layer with the running scene',async()=>{
   const h=await sceneHarness(false);
   for(let t=0;t<=8000;t+=40)h.step(t);
@@ -62,6 +72,18 @@ test('pausing and changing the motion preference controls every water layer with
   assert.equal(h.nodes['#software-code'].dataset.time,time);
   h.preference.matches=true;h.preference.listeners.get('change')();
   assert.equal(h.frames.size,0);assert.equal(h.nodes['#pond-surface'].dataset.time,'18.00');
+});
+
+test('actual pointermove handlers can startle a forming koi without pointerdown or click',async()=>{
+  const h=await sceneHarness(false);
+  for(let t=0;t<=1500;t+=40)h.step(t);
+  const event=(x,timeStamp)=>({clientX:x,clientY:230,timeStamp,pointerType:'mouse',target:{closest:()=>null}});
+  const move=h.nodes['.hero'].listeners.get('pointermove');
+  move(event(100,2000));move(event(300,2020));
+  let reacted=false;
+  for(let t=1520;t<=3500;t+=40){h.step(t);reacted||=/STARTLED|FLEEING/.test(h.nodes['.koi-scene'].dataset.behavior);}
+  assert.equal(h.nodes['.koi-scene'].dataset.koiBirth,'forming');
+  assert.equal(h.nodes['.koi-scene'].dataset.stimulus,'shock');assert.ok(reacted);
 });
 
 test('the actual water renderer supplies a working Canvas fallback when WebGL2 is unavailable',()=>{

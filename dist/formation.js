@@ -6,7 +6,12 @@ export function formationAt(time,seed=0){
 }
 // The ink frontier is attached to material coordinates on the moving spine.
 // Adjacent scales share a smooth arrival time; there is no screen-space mask.
-export function materialAt(time,u,v=0,seed=0){
-  const frontier=4.1+(1-u)*2.3+Math.sin(u*11+seed)*.65+Math.sin(v*9+u*4)*.35+seed*.07;
-  return ease((time-frontier)/3.4);
+export function materialFrontier(u,v=0,seed=0){return 4.1+(1-u)*2.3+Math.sin(u*11+seed)*.65+Math.sin(v*9+u*4)*.35+seed*.07;}
+export function materialAt(time,u,v=0,seed=0){return ease((time-materialFrontier(u,v,seed))/3.4);}
+// Code and pigment share a living trajectory; motion grows continuously during birth.
+export function koiBirthAt(time,seed=0){
+  const swimAt=10.8+seed*.07;
+  return {gather:ease((time-seed*.07)/3.6),density:.08+.92*ease((time-seed*.07)/3.4),
+    state:time<3?'EMERGING':time<swimAt?'ASSEMBLING':'SWIMMING',
+    swimming:true,formed:time>=swimAt,motion:.3+.7*ease(time/swimAt),swimAt,tail:1};
 }

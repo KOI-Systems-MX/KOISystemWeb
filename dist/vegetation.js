@@ -1,3 +1,4 @@
+import {rippleAt} from './hydrodynamics.js';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export function createFloaters(definitions,previous=[]){
   return definitions.map(d=>{
@@ -24,9 +25,9 @@ export function advanceFloaters(plants,fish,ripples,time,delta,field){
         torque+=(rx/d*uy-ry/d*ux)*influence*.11;
       }
       for(const ripple of ripples){
-        const age=t-ripple.born;if(age<0||age>5)continue;
+        const wave=rippleAt(ripple,t);if(!wave)continue;const {age}=wave;
         const rx=x-ripple.x,ry=y-ripple.y,d=Math.hypot(rx,ry);if(d<1)continue;
-        const band=Math.max(0,1-Math.abs(d-(5+age*23))/Math.max(18,f.r*.8));
+        const band=Math.max(0,1-Math.abs(d-wave.radius)/Math.max(18,f.r*.8));
         const force=band*Math.exp(-age*.5)*ripple.strength*5;
         fx+=rx/d*force;fy+=ry/d*force;torque+=Math.sin(seed+age)*force*.012;
       }

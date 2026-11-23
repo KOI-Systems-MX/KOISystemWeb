@@ -4,13 +4,28 @@
 .hero[data-submerged] #scene-bits{z-index:7}
 .hero[data-submerged] .koi-controls,.hero[data-submerged] .prototype-expand{z-index:8}
 .hero[data-submerged] .software-window{
-  background:rgb(242 246 232 / calc(var(--frame)*.96));
-  border-color:rgb(109 149 139 / calc(var(--frame)*.3));
+  background:rgb(227 233 238 / calc(var(--frame)*.91));
+  border-color:rgb(106 129 152 / calc(var(--frame)*.16));
   border-radius:8px;
-  box-shadow:inset 0 0 28px rgb(48 92 85 / calc(var(--frame)*.13)),0 8px 20px rgb(38 78 68 / calc(var(--frame)*.045));
+  box-shadow:inset 0 0 34px rgb(48 70 92 / calc(var(--frame)*.2)),inset 0 3px 12px rgb(40 61 82 / calc(var(--frame)*.1));
 }
-.hero[data-submerged] .software-chrome{background:#2c5156;color:#f6f4e5}
-.hero[data-submerged] .mock-search{background:#f5f7ed;border-color:#b6cbbb}
-.hero[data-submerged] .product-stage{color:#20494b}
-.hero[data-submerged] .hero-copy h1{color:#214b4b;text-shadow:none}
+.hero[data-submerged] .software-chrome{background:#46586a;color:#f6f4e5}
+.hero[data-submerged] .mock-search{background:#eff2f5;border-color:#b5c1cc}
+.hero[data-submerged] .product-stage{color:#20364b}
+.hero[data-submerged] .hero-copy h1{color:#21364b;text-shadow:none}
 .hero[data-submerged] .hero-copy h1 em{color:#a85b42}
+/* Geometry is exposed only where tail code has resolved into real UI cells. */
+.hero[data-submerged] [data-construction="components"] .software-window{
+  isolation:isolate;background:transparent;border-color:transparent;box-shadow:none;
+  opacity:var(--dissolve,1);clip-path:none;
+}
+.hero[data-submerged] [data-construction="components"] .software-window::before{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+  background:rgb(227 233 238 / .91);border:1px solid #6a819829;
+  box-shadow:inset 0 0 34px #30465c33,inset 0 3px 12px #283d521a;
+  mask-image:var(--bed-mask,linear-gradient(transparent,transparent));mask-size:100% 100%;mask-repeat:no-repeat;
+}
+.hero[data-submerged] [data-construction="components"] .software-chrome,
+.hero[data-submerged] [data-construction="components"] [data-build-group]{
+  opacity:1;clip-path:none;transform:none;mask-size:100% 100%;mask-repeat:no-repeat;
+}

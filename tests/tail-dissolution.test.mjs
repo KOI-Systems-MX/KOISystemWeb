@@ -63,7 +63,9 @@ test('fin pigment progressively releases while every body pixel keeps its origin
   }
   assert.ok(eroded>5000);
   const levels=Array.from({length:300},(_,i)=>tailField(.03,.4,i/10,2));
-  assert.ok(Math.max(...levels)-Math.min(...levels)>.4,'the tail must visibly progress, not keep one fixed opacity');
+  assert.ok(Math.min(...levels)>.8,'the terminal fin must never return to an intact silhouette');
+  const breathing=Array.from({length:300},(_,i)=>tailField(.19,.4,i/10,2));
+  assert.ok(Math.max(...breathing)-Math.min(...breathing)>.08,'the transition nearer the fin root keeps breathing');
 });
 test('released code carries fin colour toward cyan then a muted distant trace without a colour jump',()=>{
   const read=value=>value.match(/\d+/g).map(Number);
@@ -74,4 +76,30 @@ test('released code carries fin colour toward cyan then a muted distant trace wi
   }
   const near=read(tailColor(.7,'rgb(180,95,55)',1)),far=read(tailColor(3,'rgb(180,95,55)',1));
   assert.ok(Math.max(...far)-Math.min(...far)<Math.max(...near)-Math.min(...near));
+});
+
+test('birth renderer never paints an intact terminal fin, even while the body is forming',()=>{
+  const width=50,height=30;
+  function render(time){
+    const data=new Uint8ClampedArray(width*height*4).fill(220);
+    const paint={canvas:{width,height},clearRect(){},drawImage(){},getImageData(){return {data};},putImageData(){}};
+    paintDissolvingTail(paint,{},time,2,true);return data;
+  }
+  const start=render(0),complete=render(11),later=render(16);
+  for(let i=3;i<start.length;i+=4)assert.equal(start[i],0,'the koi cannot start as a finished image');
+  assert.ok(complete[(15*width+2)*4+3]<60,'the terminal fin is already disintegrating as the body completes');
+  const forming=render(8);
+  assert.ok(forming[(15*width+2)*4+3]<60,'the forming fin never has an intact intermediate state');
+  assert.ok(later[(15*width+2)*4+3]<60);
+  for(let y=0;y<height;y++)for(let x=Math.ceil(width*.32);x<width;x++)assert.equal(later[(y*width+x)*4+3],220);
+});
+
+test('pigment caching reuses original pixels without accumulating erosion or retaining an incomplete body',()=>{
+  const width=60,height=40,data=new Uint8ClampedArray(width*height*4).fill(220),image={};let draws=0,reads=0;
+  const paint={canvas:{width,height},clearRect(){},drawImage(){draws++;},getImageData(){reads++;return {data};},putImageData(){}};
+  paintDissolvingTail(paint,image,8,2,true);const first=data.slice();
+  paintDissolvingTail(paint,image,8,2,true);assert.deepEqual(data,first);
+  paintDissolvingTail(paint,image,18,2,true);
+  for(let y=0;y<height;y++)for(let x=Math.ceil(width*.32);x<width;x++)assert.equal(data[(y*width+x)*4+3],220);
+  assert.equal(draws,1);assert.equal(reads,1);
 });

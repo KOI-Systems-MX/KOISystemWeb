@@ -1,0 +1,17 @@
+/* One chapter fills the space below the persistent navigation. Long content
+   may grow, including at text zoom, rather than being clipped inside a panel. */
+html{scroll-padding-top:var(--site-header-height);scroll-snap-type:y mandatory}
+main>section{scroll-snap-align:start;scroll-snap-stop:always}
+main>section:not(.hero){min-height:calc(100vh - var(--site-header-height));min-height:calc(100dvh - var(--site-header-height))}
+main>.about-film,main>.purpose-section,main>.demo-section{display:flex;flex-direction:column;justify-content:center}
+main>.about-film{padding-block:48px}
+main>.section{display:flex;flex-direction:column;justify-content:center}
+main>.contact-section.wrap{
+  width:100%;max-width:none;margin:0;border-radius:0;
+  padding-inline:max(32px,calc((100% - 1240px)/2));align-content:center;
+}
+footer{scroll-snap-align:end}
+@media(max-width:700px){
+  main>.about-film{padding-block:48px}
+  main>.contact-section.wrap{padding-inline:24px}
+}

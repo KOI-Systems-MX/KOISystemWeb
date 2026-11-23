@@ -1,0 +1,45 @@
+.identity-presentation{min-width:0}
+.about-overview .identity-presentation .film-frame{width:100%;max-width:100%;aspect-ratio:4/3;min-height:340px;background:transparent;border:0;border-radius:0;box-shadow:none;isolation:isolate}
+.identity-water,.identity-type{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.identity-water{z-index:3}
+.identity-type{z-index:2}
+.identity-type{font-family:'Segoe UI',Arial,sans-serif;fill:#f8f7f1;visibility:hidden}
+.film-frame[data-identity-time] .identity-type{visibility:visible}
+.identity-glyphs{font-size:160px;font-weight:800;text-anchor:middle}
+.identity-words{font-size:76px;font-weight:800;letter-spacing:-1px}
+.identity-presentation .film-frame .film-ending{transition:none;background:transparent;z-index:1;padding:18px}
+.identity-presentation .film-logo-mount{padding:0;background:none;border:0;box-shadow:none;display:flex;flex-direction:column;align-items:center;gap:10px}
+.identity-presentation .film-logo-mount img{width:180px}
+.identity-final-name{font:750 30px/1.1 'Segoe UI',Arial,sans-serif;letter-spacing:-1px;color:var(--paper)}
+.identity-presentation .film-ending p{font-size:18px;margin:14px 0;max-width:360px}
+.identity-controls{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:12px}
+.identity-controls[hidden]{display:none}
+.identity-controls button{background:transparent;border:0;border-bottom:1px solid #9bb2c5;color:var(--navy);font-size:13px;min-height:44px;padding:6px 0}
+.identity-controls button:hover{color:var(--orange-deep)}
+.identity-controls button:disabled{color:var(--steel);cursor:default;border-color:transparent}
+.identity-status{font-size:12px;color:var(--muted);flex-basis:100%}
+.identity-explanation{padding:16px 0;border-top:0;font-size:14px}
+.identity-explanation summary{font-weight:400;min-height:44px;align-items:center}
+.identity-explanation summary::after{content:'+';color:var(--orange-deep);margin-left:14px}
+.identity-explanation[open] summary::after{content:'−'}
+.identity-explanation p{font-size:14px;line-height:1.8;margin-top:8px}
+@media(max-width:700px){.identity-controls{gap:8px 16px}.identity-presentation .film-logo-mount img{width:140px}.identity-presentation .film-logo-mount{gap:8px}.identity-final-name{font-size:26px}.identity-presentation .film-ending p{margin:10px 0}}
+@media(prefers-reduced-motion:reduce){.identity-water,.identity-type{display:none}}
+/* A full-width navy chapter separates the company story from the services. */
+.about-film{background:var(--navy);color:var(--paper);padding-block:80px 88px;border-block:1px solid #294963}
+.about-film .about-film-heading h2,.about-film .about-story h3{color:var(--paper)}
+.about-film .about-film-heading .eyebrow{color:#c2d4e2;font-size:11px;letter-spacing:1.6px}
+.about-film .about-film-heading h2.eyebrow{font:650 9px/1.5 'Segoe UI',Arial,sans-serif;letter-spacing:1.9px;color:#c2d4e2;margin:0}
+.about-film .about-overview{border-top-color:#607c9459}
+.about-film .about-story h3 em{color:#ff9968}
+.about-film .about-story p{color:#d2dee8}
+.about-film .about-story .about-belief{color:var(--paper)}
+.about-film .about-contact,.about-film .identity-controls button{color:var(--paper);border-color:#90abc0}
+.about-film .about-contact:hover,.about-film .identity-controls button:hover{color:#ff9968}
+.about-film .identity-status,.about-film .identity-explanation p{color:#c2d4e2}
+.about-film .identity-explanation{border-color:#607c9459}
+.about-film .identity-explanation summary::after{color:#ff9968}
+.about-film .identity-controls button:disabled{color:#afc2d1}
+.about-film .identity-presentation .film-frame{border:0;box-shadow:none;background:transparent}
+#solucion{padding-block:88px 96px}
+@media(max-width:700px){.about-film{padding-block:56px 60px}#solucion{padding-block:60px 64px}}

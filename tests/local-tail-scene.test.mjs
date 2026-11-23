@@ -39,3 +39,64 @@ test('pause and static view preserve the local simulation, expiry and reset leav
   for(let frame=1;frame<=60;frame++)state=stream.update(4+frame/30,[],target);
   assert.equal(state.particles.length,0);stream.reset();assert.equal(stream.update(0,[],target).progress,0);
 });
+
+test('initial pond formation finishes before even a nearby koi starts building',()=>{
+  const stream=createLocalTailScene({nearbyBuild:true,buildAfter:10});
+  const near={fishId:2,x:980,y:320,speed:65,ports:[{x:980,y:320,heading:0}]};
+  for(let frame=0;frame<300;frame++){
+    const state=stream.update(frame/30,[near],target);
+    assert.equal(state.progress,0);assert.equal(state.builder,null);assert.equal(state.transfers.length,0);
+  }
+  const started=stream.update(10,[near],target);
+  assert.equal(started.builder,2);assert.equal(started.phase,'materialization');assert.ok(started.transfers.length>0);
+});
+
+test('nearby construction waits for a close fin and accepts only one builder per cycle',()=>{
+  const stream=createLocalTailScene({nearbyBuild:true});let state;
+  for(let frame=0;frame<=600;frame++)state=stream.update(frame/30,[source(frame/30)],target);
+  assert.equal(state.progress,0);assert.equal(state.phase,'emission');assert.equal(state.transfers.length,0);
+  const near=(id,x)=>({fishId:id,x,y:320,length:160,speed:65,ports:[{x,y:320,heading:0,u:.08,v:.5}]});
+  let seen=0;
+  for(let frame=1;frame<=210;frame++){
+    const t=20+frame/30,sources=[source(t),near(2,980),near(3,frame<20?960:1005)];
+    state=stream.update(t,sources,target);
+    assert.ok(state.transfers.length<=4);
+    for(const p of state.transfers){
+      seen++;assert.equal(p.fishId,2,'a closer second koi must not steal the active build');
+      assert.ok(p.sx>=target.left-48);assert.ok(Math.hypot(p.tx-p.sx,p.ty-p.sy)<=48);
+      assert.ok(Math.hypot(p.x-p.sx,p.y-p.sy)<54);assert.ok(p.age<.85);
+    }
+  }
+  assert.ok(seen>0);assert.equal(state.phase,'software');assert.equal(state.progress,1);
+  assert.equal(state.transfers.length,0);assert.equal(state.builder,null);
+});
+test('a builder that swims away stops transferring, without preventing completion or reset',()=>{
+  const stream=createLocalTailScene({nearbyBuild:true});let state,afterLeaving=new Set();
+  const near=(x)=>({fishId:1,x,y:300,length:160,speed:70,ports:[{x,y:300,heading:0,u:.1,v:.5}]});
+  for(let frame=0;frame<=240;frame++){
+    const t=frame/30;state=stream.update(t,[near(t<1?980:400)],target);
+    if(t>2)for(const p of state.transfers)afterLeaving.add(p.id);
+  }
+  assert.equal(afterLeaving.size,0);assert.equal(state.phase,'software');assert.equal(state.transfers.length,0);
+  stream.reset();state=stream.update(0,[source(0)],target);
+  assert.equal(state.progress,0);assert.equal(state.builder,null);assert.equal(state.transfers.length,0);
+});
+
+test('binary construction stays inside the prototype and clears when its UI is complete',()=>{
+  const stream=createLocalTailScene({nearbyBuild:true});
+  const near={fishId:2,x:980,y:320,speed:65,ports:[{x:980,y:320,heading:0}]};
+  stream.update(0,[near],target);
+  let maximum=0;
+  for(let frame=1;frame<=210;frame++){
+    const state=stream.update(frame/30,[near],target);
+    maximum=Math.max(maximum,state.assembly.length);
+    for(const p of state.assembly){
+      assert.match(p.text,/^[01]$/);assert.equal(p.fishId,2);
+      assert.ok(p.x>target.left&&p.x<target.left+target.width);
+      assert.ok(p.y>target.top&&p.y<target.top+target.height);
+    }
+    if(state.phase==='software')assert.equal(state.assembly.length,0);
+  }
+  assert.ok(maximum>200&&maximum<1000);
+  assert.equal(stream.update(8,[near],target,true).assembly.length,0);
+});

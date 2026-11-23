@@ -51,7 +51,7 @@ export function createSceneBits({hero,panel,scene}){
     const step=Math.max(18,Math.ceil(Math.sqrt(width*height/2800)));
     for(let y=step/2;y<height;y+=step)for(let x=step/2;x<width;x+=step){
       const rank=hash(x*7+y*11),gather=ease((time-rank*3)/2.2);
-      paint.globalAlpha=gather*(1-state.water)*.42;paint.fillStyle=rank>.86?'#a46d48':'#426b63';
+      paint.globalAlpha=gather*(1-state.water)*.42;paint.fillStyle=rank>.86?'#a46d48':'#42576b';
       paint.fillText(rank>.5?'1':'0',x+Math.sin(rank*40)*(1-gather)*28,y-(1-gather)*32+Math.sin(x*.005+time*.3)*2);
     }
     for(const p of points){

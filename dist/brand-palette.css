@@ -1,0 +1,49 @@
+/* Corporate digital palette. Original logo and botanical RGBA assets stay intact. */
+:root{
+  --ink:#102c46;--navy:#102c46;--steel:#617c94;--muted:#4e657b;
+  --orange:#f16a2b;--orange-deep:#c94419;--paper:#f8f7f1;
+  --line:#cbd8e2;--mint:#dce8ed;--water:#dce8ed;
+}
+body{background:var(--paper);color:var(--navy)}
+h1,h2,h3,.section h2,.purpose-section h2,.about-film-heading h2{color:var(--navy)}
+p{color:var(--muted)}
+.header nav a,.header .brand,.header .header-cta{color:var(--navy)}
+.header .brand-caption,.eyebrow,.hero-note,.values article>span{color:#506a82}
+.header nav a:hover,.text-link:hover{color:var(--orange-deep)}
+.button,.hero[data-submerged] .hero-actions .button{background:var(--navy);border-color:var(--navy)}
+.button:hover,.hero[data-submerged] .hero-actions .button:hover{background:#254a6c;border-color:#254a6c}
+.header .header-cta{background:#f8f7f1d9;border-color:#a6bacb}
+.hero[data-submerged] .hero-copy h1{color:var(--navy)}
+.hero[data-submerged] .hero-copy h1 em{color:var(--orange-deep)}
+.hero[data-submerged] .hero-copy>p{color:#344e66}
+.hero[data-submerged] .hero-copy .eyebrow,.hero[data-submerged] .hero-note,
+.hero[data-submerged] .koi-controls button,.hero[data-submerged] .software-caption{color:#49657d}
+.hero[data-submerged] .software-caption>span:last-child{color:var(--orange-deep)}
+.hero[data-submerged] .software-chrome{background:var(--navy);color:var(--paper)}
+.hero[data-submerged] [data-construction="components"] .software-window::before{
+  background:rgb(244 247 247 / .94);border-color:#9bb2c550;
+  box-shadow:inset 0 0 34px #102c4626,inset 0 3px 12px #102c4614;
+}
+.product-stage,.hero[data-submerged] .product-stage,.product-stage h3,.ticket-total strong{color:var(--navy)}
+.product-stage small,.product-bottom,.matrix-toolbar>span,.ticket-item>span{color:#4e657b}
+.inventory-kpis article>span,.admin-kpis article>span,.catalog-stock,
+.ticket-title>span,.ship-bow,.route-key,.pick-list article>span,.category-line{color:#4e657b}
+.product-tag{background:#e2ebf1;color:#34536e}
+.product-tag.orange,.stock-matrix td em{background:#fce7db;color:var(--orange-deep)}
+.orange-text,.catalog-grid article>span,.category-line b,.product-bottom b{color:var(--orange-deep)}
+.mock-button{background:var(--navy);border-color:var(--navy)}
+.catalog-grid article,.inventory-kpis article,.admin-kpis article,.voyage-strip{background:#edf2f5;border-color:#c5d4e0}
+.catalog-grid i,.stock-matrix th{background:#e1eaf0;color:#34536e}
+.pos-ticket,.finance-chart{background:#f8faf9;border-color:#c5d4e0}
+.finance-chart .income-line{stroke:var(--navy)}
+.finance-chart .expense-line{stroke:var(--orange)}
+.finance-chart .income-area{fill:#617c9438}
+.finance-chart text{fill:#4e657b}
+.finance-chart .matrix-toolbar i,.reconciliation em{background:var(--steel)}
+.finance-chart .matrix-toolbar em,.pick-progress em{background:var(--orange)}
+.deck-zone.current{background:#fce7db;border-color:#eaa681;color:var(--orange-deep)}
+.purpose-section{background:#e9eff3}
+.prototype-dialog{background:var(--paper);color:var(--navy);border-color:#a6bacb}
+.prototype-dialog::backdrop{background:#102c4666}
+.prototype-dialog .software-chrome{background:var(--navy);color:var(--paper)}
+.prototype-expand{background:var(--paper);color:var(--navy);border-color:#9bb2c5}
