@@ -1,6 +1,6 @@
 #scene-bits{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6}
 .hero.water-ready #pond-floor,.hero.water-ready #pond-surface{opacity:var(--water-build,1)}
-.hero-copy{opacity:var(--message-build,1)}
+.hero-copy{opacity:1}
 .header{opacity:var(--identity-build,1)}
 /* Keyboard navigation always brings the live, readable DOM content into view. */
 .hero-copy:focus-within,.header:focus-within{opacity:1}

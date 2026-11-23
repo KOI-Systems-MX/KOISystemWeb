@@ -2,10 +2,10 @@ const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 const hash=n=>{const v=Math.sin(n*127.1+311.7)*43758.5453;return v-Math.floor(v);};
 export function sceneBuildAt(time,still=false){
   if(still)return {water:1,message:1,identity:1,bits:0};
-  return {water:ease((time-4)/6),message:ease((time-5)/5),identity:ease((time-3)/4),bits:1-ease((time-7)/4)};
+  return {water:ease((time-4)/6),message:1,identity:ease((time-3)/4),bits:1-ease((time-7)/4)};
 }
 
-// This layer shares the pond clock. Text is sampled from its actual DOM glyphs;
+// This layer shares the pond clock. The main message stays readable from frame zero;
 // original logo pixels supply the identity silhouette, without replacing the asset.
 export function createSceneBits({hero,panel,scene}){
   const canvas=document.createElement('canvas');canvas.id='scene-bits';canvas.setAttribute('aria-hidden','true');hero.append(canvas);
@@ -16,7 +16,7 @@ export function createSceneBits({hero,panel,scene}){
     const bounds=scene.getBoundingClientRect();width=bounds.width;height=bounds.height;
     const ratio=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);paint.setTransform(ratio,0,0,ratio,0,0);
     sample.width=Math.ceil(width);sample.height=Math.ceil(height);points=[];
-    for(const [root,type] of [[panel,'message'],[header,'identity']]){
+    for(const [root,type] of [[header,'identity']]){
       if(!root)continue;ink.clearRect(0,0,width,height);
       const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
       while(walker.nextNode()){
